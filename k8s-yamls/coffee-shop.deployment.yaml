@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-shop
+spec:
+  selector:
+    matchLabels:
+      app: coffee-shop
+  template:
+    metadata:
+      labels:
+        app: coffee-shop
+    spec:
+      containers:
+      - env:
+          - name: SERVER_PORT
+            value: "3000"
+          - name: DB_HOST
+            value: postgres.database
+          - name: DB_USER
+            value: postgres
+          - name: DB_PASSWORD
+            value: P@ssword
+          - name: DB_NAME
+            value: coffee_db
+        image: coffee-shop:latest
+        imagePullPolicy: Always
+        name: coffee-shop
+        ports:
+        - containerPort: 3000
+          protocol: TCP
